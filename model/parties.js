@@ -11,8 +11,8 @@ Parties.allow({
     return userId && party.owner === userId;
   }
 });
-
-Meteor.methods({
+if (Meteor.isServer) {
+  Meteor.methods({
   invite: function (partyId, userId) {
     check(partyId, String);
     check(userId, String);
@@ -87,6 +87,7 @@ Meteor.methods({
     }
   }
 });
+}
 
 var contactEmail = function (user) {
   if (user.emails && user.emails.length)
